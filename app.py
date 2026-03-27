@@ -109,12 +109,16 @@ def live():
 
     return Response("\n".join(lines), mimetype="text/plain")
 
-# JSON API (optional)
-@app.route("/api/json")
-def json_api():
-    return jsonify(results)
+from flask import Flask, jsonify
+
+app = Flask(__name__, static_folder=".")
 
 
+
+@app.route("/api/live")
+def live():
+    # your live JSON data logic
+    return jsonify([])
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False)
+    app.run(host="0.0.0.0", port=10000)
