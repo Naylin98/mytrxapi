@@ -4,8 +4,10 @@ from datetime import datetime
 import threading
 import time
 import re
+import os
 
-app = Flask(__name__, static_url_path="", static_folder=".")
+app = Flask(__name__, static_folder=".")
+
 
 # TRON block API
 BASE_URL = "https://apilist.tronscanapi.com/api/block"
@@ -121,4 +123,6 @@ def home():
     return app.send_static_file("index.html")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
