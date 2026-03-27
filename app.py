@@ -114,10 +114,7 @@ def live():
 def json_api():
     return jsonify(results)
 
-# HTML
-@app.route("/")
-def home():
-    return app.send_static_file("index.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)
