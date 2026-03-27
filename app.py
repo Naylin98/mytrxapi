@@ -109,15 +109,16 @@ def live():
 
     return Response("\n".join(lines), mimetype="text/plain")
 
-# JSON API (optional)
-@app.route("/api/json")
-def json_api():
-    return jsonify(results)
+# API route
+@app.route("/api/live")
+def live():
+    with lock:
+        return jsonify(results)
 
-# HTML
+# Serve HTML
 @app.route("/")
 def home():
     return app.send_static_file("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False)
+    app.run(host="0.0.0.0", port=10000)
